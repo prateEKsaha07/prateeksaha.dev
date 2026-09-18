@@ -1,0 +1,10 @@
+{
+  "description": "Personal portfolio site.",
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": true,
+    "ignoreReducedMotion": false
+  }
+}
