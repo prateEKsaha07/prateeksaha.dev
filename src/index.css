@@ -147,3 +147,25 @@ body {
 .delay-4 { transition-delay: 0.4s; }
 .delay-5 { transition-delay: 0.5s; }
 .delay-6 { transition-delay: 0.6s; }
+
+/* ─── Navbar responsive ────────────────────────── */
+@media (max-width: 700px) {
+  .hidden-mobile { display: none !important; }
+  .show-mobile   { display: block !important; }
+}
+@media (min-width: 701px) {
+  .show-mobile { display: none !important; }
+}
+
+/* ─── Custom cursor — hidden on mobile widths ───── */
+@media (max-width: 900px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+  /* Restore native cursor on mobile */
+  body, a, button, input, textarea, [role="button"] {
+    cursor: auto !important;
+  }
+  body { cursor: auto; }
+}
