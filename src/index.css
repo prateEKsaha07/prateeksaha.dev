@@ -365,3 +365,6 @@ body {
     font-family: 'JetBrains Mono', 'Courier New', monospace !important;
   }
 }
+html {
+  font-size: 14px;
+}

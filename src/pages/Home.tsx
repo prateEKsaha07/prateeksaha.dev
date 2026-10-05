@@ -29,87 +29,70 @@ export function Home() {
       <NavBar active={activeSection} />
 
       {/* ═══ HERO ═══════════════════════════════════════════════════════ */}
-      <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 7vw, 6rem) clamp(4rem, 8vw, 6rem)' }}>
+      <section
+        id="hero"
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 7vw, 6rem) clamp(4rem, 8vw, 6rem)',
+        }}
+      >
         <div style={gridStyle} />
 
-        <div style={{
-          position: 'absolute', right: 'clamp(-2rem, -2vw, -1rem)', top: '50%', transform: 'translateY(-50%)',
-          fontFamily: 'Outfit,sans-serif', fontWeight: 900, fontSize: 'clamp(8rem, 22vw, 20rem)',
-          lineHeight: 0.85, color: 'transparent', WebkitTextStroke: '1px #1a1a1a',
-          userSelect: 'none', zIndex: 0, pointerEvents: 'none',
-        }}>PS</div>
+        {/* PS watermark — small, subtle, sits behind content on the right */}
+        <div className="hero-watermark" aria-hidden="true">PS</div>
 
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '900px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2.5rem' }}
-               className="reveal">
+        <div className="hero-content">
+          <div className="reveal" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2.5rem' }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', animation: 'pulseGlow 2s infinite' }} />
             <span style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>Open to opportunities · Fresher</span>
           </div>
 
-          <h1 className="reveal" style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 900, fontSize: 'clamp(3rem, 9vw, 7.5rem)', lineHeight: 0.9, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>
+          <h1 className="reveal hero-name">
             <GlitchText text={profile.name} />
           </h1>
 
-          <div className="reveal delay-1" style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: 'clamp(0.85rem, 2vw, 1.1rem)', color: 'var(--muted-foreground)', marginBottom: '2rem', height: '2rem', display: 'flex', alignItems: 'center', gap: '2px' }}>
+          <div className="reveal delay-1 hero-typed">
             <span style={{ color: 'var(--accent)' }}>_</span>
             <span>{typed}</span>
             <span style={{ animation: 'blink 1s infinite', color: 'var(--accent)' }}>|</span>
           </div>
 
-          <p className="reveal delay-2" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)', lineHeight: 1.8, color: 'var(--secondary-foreground)', maxWidth: '560px', marginBottom: '3rem' }}>
+          <p className="reveal delay-2 hero-paragraph">
             I build backend services and the data layers behind them. FastAPI, Postgres, RAG pipelines — and a running lab of data work I keep public.
           </p>
 
-          <div className="reveal delay-3" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+          <div className="reveal delay-3 hero-ctas">
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              style={{
-                fontFamily: 'Outfit,sans-serif', fontWeight: 700, fontSize: '0.875rem',
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                background: 'var(--accent)', color: 'var(--accent-foreground)',
-                padding: '0.875rem 2rem', border: 'none', cursor: 'none',
-                animation: 'pulseGlow 3s 3',
-                transition: 'transform 0.2s',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-              onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+              className="hero-cta hero-cta-primary"
             >
               View Projects →
             </button>
-            <a
-              href={`mailto:${profile.email}`}
-              style={{
-                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.75rem',
-                letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: 'var(--foreground)', padding: '0.875rem 2rem',
-                border: '1px solid var(--border)', textDecoration: 'none',
-                transition: 'border-color 0.2s, color 0.2s', cursor: 'none',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--foreground)' }}
-            >
+            <a href={`mailto:${profile.email}`} className="hero-cta hero-cta-secondary">
               Get in Touch
             </a>
           </div>
 
-          <div className="reveal delay-4" style={{ display: 'flex', gap: '1.5rem', marginTop: '3rem' }}>
+          <div className="reveal delay-4 hero-socials">
             {[
               { label: 'GitHub', href: profile.github },
               { label: 'LinkedIn', href: profile.linkedin },
               { label: 'Email', href: `mailto:${profile.email}` },
             ].map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
-                style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted-foreground)', textDecoration: 'none', transition: 'color 0.2s', borderBottom: '1px solid transparent', cursor: 'none' }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderBottomColor = 'var(--accent)' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted-foreground)'; e.currentTarget.style.borderBottomColor = 'transparent' }}
-              >{s.label} ↗</a>
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="hero-social-link">
+                {s.label} ↗
+              </a>
             ))}
           </div>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.55rem', letterSpacing: '0.2em', color: 'var(--muted-foreground)', textTransform: 'uppercase' }}>scroll</span>
-          <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--border), var(--accent))', animation: 'float 2s ease-in-out infinite' }} />
+        <div className="hero-scroll">
+          <span className="hero-scroll-label">scroll</span>
+          <div className="hero-scroll-line" />
         </div>
       </section>
 
@@ -312,38 +295,177 @@ export function Home() {
         </div>
       </footer>
 
-      {/* Global styles */}
+      {/* ═══ SCOPED STYLES ══════════════════════════════════════════════ */}
       <style>{`
-        /* Custom cursor — hidden by default */
-        .cursor-dot, .cursor-ring { display: none; }
-
-        /* Show only on real pointer devices (not touch), and only if user hasn't requested reduced motion */
-        @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-          .cursor-dot, .cursor-ring { display: block; }
-          body, a, button, input, textarea, [role="button"] { cursor: none !important; }
+        /* ── Hero content ── */
+        .hero-content {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 720px;
+          min-width: 0;
         }
 
-        @keyframes pulseGlow {
-          0%,100% { box-shadow: 0 0 0 0 rgba(0,255,133,0); }
-          50% { box-shadow: 0 0 28px 6px rgba(0,255,133,0.22); }
+        /* ── Hero name ── */
+        .hero-name {
+          font-family: 'Outfit', sans-serif;
+          font-weight: 900;
+          font-size: clamp(2.75rem, 6vw, 5rem);
+          line-height: 0.95;
+          letter-spacing: -0.03em;
+          margin: 0 0 1.25rem;
         }
-        @keyframes float {
-          0%,100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+
+        /* ── Typewriter ── */
+        .hero-typed {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: clamp(0.85rem, 1.5vw, 1rem);
+          color: var(--muted-foreground);
+          margin-bottom: 2rem;
+          height: 1.5rem;
+          display: flex;
+          align-items: center;
+          gap: 2px;
         }
-        @keyframes blink {
-          0%,49% { opacity: 1; }
-          50%,100% { opacity: 0; }
+
+        /* ── Paragraph ── */
+        .hero-paragraph {
+          font-size: clamp(0.875rem, 1.4vw, 1rem);
+          line-height: 1.75;
+          color: var(--secondary-foreground);
+          max-width: 560px;
+          margin: 0 0 2.5rem;
         }
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
+
+        /* ── CTAs ── */
+        .hero-ctas {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          align-items: center;
+          margin-bottom: 3rem;
         }
-        @keyframes glitch {
-          0%,80%,100% { clip-path: none; transform: translate(0); filter: none; }
-          82% { clip-path: polygon(0 15%,100% 15%,100% 35%,0 35%); transform: translate(-4px,1px); filter: hue-rotate(90deg); }
-          84% { clip-path: polygon(0 60%,100% 60%,100% 80%,0 80%); transform: translate(4px,-1px); filter: hue-rotate(-90deg); }
-          86% { clip-path: none; transform: translate(0); filter: none; }
+
+        .hero-cta {
+          font-family: 'Outfit', sans-serif;
+          font-weight: 700;
+          font-size: 0.8rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 0.875rem 1.75rem;
+          cursor: none;
+          transition: all 0.2s;
+          text-decoration: none;
+          display: inline-block;
+        }
+
+        .hero-cta-primary {
+          background: var(--accent);
+          color: var(--accent-foreground);
+          border: 1px solid var(--accent);
+          animation: pulseGlow 3s 3;
+        }
+
+        .hero-cta-primary:hover {
+          transform: translateY(-2px);
+        }
+
+        .hero-cta-secondary {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+          color: var(--foreground);
+          background: transparent;
+          border: 1px solid var(--border);
+        }
+
+        .hero-cta-secondary:hover {
+          border-color: var(--accent);
+          color: var(--accent);
+        }
+
+        /* ── Socials ── */
+        .hero-socials {
+          display: flex;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+        }
+
+        .hero-social-link {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.65rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+          text-decoration: none;
+          transition: color 0.2s, border-color 0.2s;
+          border-bottom: 1px solid transparent;
+          cursor: none;
+        }
+
+        .hero-social-link:hover {
+          color: var(--accent);
+          border-bottom-color: var(--accent);
+        }
+
+        /* ── Scroll indicator ── */
+        .hero-scroll {
+          position: absolute;
+          bottom: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .hero-scroll-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.55rem;
+          letter-spacing: 0.2em;
+          color: var(--muted-foreground);
+          text-transform: uppercase;
+        }
+
+        .hero-scroll-line {
+          width: 1px;
+          height: 40px;
+          background: linear-gradient(to bottom, var(--border), var(--accent));
+          animation: float 2s ease-in-out infinite;
+        }
+
+        /* ── PS watermark ── */
+        .hero-watermark {
+          position: absolute;
+          right: 3rem;
+          top: 50%;
+          transform: translateY(-50%);
+          font-family: 'Outfit', sans-serif;
+          font-weight: 900;
+          font-size: clamp(6rem, 14vw, 14rem);
+          line-height: 0.85;
+          color: transparent;
+          -webkit-text-stroke: 1px #161616;
+          user-select: none;
+          pointer-events: none;
+          z-index: 0;
+          opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-watermark {
+            right: -2rem;
+            opacity: 0.7;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .hero-watermark {
+            font-size: clamp(5rem, 20vw, 8rem);
+            right: -1.5rem;
+            opacity: 0.5;
+          }
         }
       `}</style>
     </>
