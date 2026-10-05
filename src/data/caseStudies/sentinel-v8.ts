@@ -52,7 +52,7 @@ The class decision was deliberate. Original annotations included riders, pedestr
 The final cleaned dataset is roughly **1,100+ images** with corresponding YOLO labels. Quality over quantity — every pair is verified to exist and match.`,
       charts: [
         {
-          src: '/src/assets/lab/sentinel-v8/01-labels-distribution.jpg',
+          src: '/lab/sentinel-v8/01-labels-distribution.jpg',
           caption: 'Dataset overview. Label distribution shows clear class imbalance — cars dominate the corpus, bikes are moderate, trucks are sparse. This imbalance is the primary driver of the model\'s per-class performance gap.',
         },
       ],
@@ -112,7 +112,7 @@ The final model has **slightly lower mAP@50** than the second phase (0.63 vs 0.6
 The image size was also reduced from YOLOv8's default 640 to 512 for the final phase, which sped up training at the cost of some small-object detection ability. That's part of why recall dropped slightly.`,
       charts: [
         {
-          src: '/src/assets/lab/sentinel-v8/02-training-results.png',
+          src: '/lab/sentinel-v8/02-training-results.png',
           caption: 'Training curves across 30 epochs. Loss components (box, class, DFL) decrease steadily; mAP@50 and mAP@50-95 both trend upward. The curves suggest training had not fully saturated — more epochs or more data would likely yield further gains.',
         },
       ],
@@ -140,11 +140,11 @@ truck  ── weakest, fails on distant or partially occluded objects
 **Note on mAP@50-95.** This metric is stricter than mAP@50 — it averages across IoU thresholds from 0.50 to 0.95 in steps of 0.05. A value of 0.47 means the model's bounding boxes are reasonably tight but not precise. For a detection demo, this is acceptable; for a downstream system that needs pixel-accurate boxes, it would need improvement.`,
       charts: [
         {
-          src: '/src/assets/lab/sentinel-v8/03-confusion-matrix.png',
+          src: '/lab/sentinel-v8/03-confusion-matrix.png',
           caption: 'Normalized confusion matrix. The dominant diagonal is car → car, which reflects class imbalance rather than model strength. The truck column shows the biggest misclassification rate — most often confused with car or background.',
         },
         {
-          src: '/src/assets/lab/sentinel-v8/04-validation-predictions.jpg',
+          src: '/lab/sentinel-v8/04-validation-predictions.jpg',
           caption: 'Predictions on validation images. Bounding boxes are tight on cars, looser on bikes in crowded scenes, and often missing entirely on distant trucks. This is the honest view of the model — good on the dominant class, weak on the minority classes.',
         },
       ],

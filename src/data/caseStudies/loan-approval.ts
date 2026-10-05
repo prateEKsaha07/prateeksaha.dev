@@ -41,11 +41,11 @@ This is a binary classification problem. The dataset is small (614 rows) and com
 The correlation heatmap showed the two expected relationships: ApplicantIncome ↔ LoanAmount (r = 0.53, larger loans go to higher earners) and Credit_History ↔ Loan_Status (r = 0.56, the strongest single signal in the dataset). No other pair crossed 0.25, which meant feature engineering had limited room to help — the signal was mostly in one column.`,
       charts: [
         {
-          src: '/src/assets/lab/loan-approval/01-correlation-heatmap.png',
+          src: '/lab/loan-approval/01-correlation-heatmap.png',
           caption: 'Correlation matrix. Credit_History ↔ Loan_Status at r = 0.56 dominates. ApplicantIncome ↔ LoanAmount at 0.53 is expected. Everything else sits below 0.25 — a low-signal dataset.',
         },
         {
-          src: '/src/assets/lab/loan-approval/02-missing-values.png',
+          src: '/lab/loan-approval/02-missing-values.png',
           caption: 'Missing values were concentrated in Credit_History (49) — the one column that mattered most. That imbalance shaped how I handled imputation.',
         },
       ],
@@ -82,7 +82,7 @@ LogisticRegression ended up being the better model in practice: 78.75% test accu
 That said, 78% is not production-grade for credit risk. The honest read is that this dataset is too small and too single-featured for any model to reliably separate approvers from rejecters.`,
       charts: [
         {
-          src: '/src/assets/lab/loan-approval/03-train-vs-test.png',
+          src: '/lab/loan-approval/03-train-vs-test.png',
           caption: 'RandomForest memorized the training set (98.3%) and collapsed on test (74.6%). LogisticRegression was the more honest model.',
         },
       ],

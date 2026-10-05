@@ -59,7 +59,7 @@ ORDER BY TotalSales DESC;
 Charts below show one of the extraction queries in the MySQL workbench.`,
       charts: [
         {
-          src: '/src/assets/lab/adventureworks-bi/02-sql-query.png',
+          src: '/lab/adventureworks-bi/02-sql-query.png',
           caption: 'One of the SQL extracts — the customer join, showing the shape of the query output before Power BI transformation.',
         },
       ],
@@ -92,7 +92,7 @@ in
 Every date field across the model references this single table. When a slicer filters "2025", it's filtering through this table, and every measure that depends on time context reads from it. This is the standard **date-table pattern** — it's what makes time intelligence functions like YTD, MTD, and YoY work correctly.`,
       charts: [
         {
-          src: '/src/assets/lab/adventureworks-bi/03-date-table-script.png',
+          src: '/lab/adventureworks-bi/03-date-table-script.png',
           caption: 'The M script that generates the date dimension. One table, generated once, referenced by every time-based measure in the model.',
         },
       ],
@@ -119,7 +119,7 @@ Every date field across the model references this single table. When a slicer fi
 **The Budget table was the tricky one.** Budget is stored at a different grain than Sales — by month and product category, not by order line. Rather than force the two into the same table, the model keeps them separate and lets relationships do the work. Actual sales get compared against budget at the category-month level, which is the grain the business actually plans at.`,
       charts: [
         {
-          src: '/src/assets/lab/adventureworks-bi/01-star-schema.png',
+          src: '/lab/adventureworks-bi/01-star-schema.png',
           caption: 'The star schema. Sales at the center, one-to-many relationships outward to Product, Customer, Date, and Geography. Budget connects through shared keys for actual-vs-budget comparisons.',
         },
       ],
@@ -145,7 +145,7 @@ Every date field across the model references this single table. When a slicer fi
 The measure that best demonstrates DAX context: **Customer Ranking**. It ranks each customer by sales within the currently selected slice. Change the slicer from "all years" to "2025" and the ranks recompute. Change the category filter and they recompute again. That behavior is what \`RANKX\` with proper filter propagation gives you — and why measures beat static columns for anything analytical.`,
       charts: [
         {
-          src: '/src/assets/lab/adventureworks-bi/04-dax-measures.png',
+          src: '/lab/adventureworks-bi/04-dax-measures.png',
           caption: 'The measure definitions. Each one is a reusable expression that adapts to whatever the report page is filtered by.',
         },
       ],
@@ -170,7 +170,7 @@ The measure that best demonstrates DAX context: **Customer Ranking**. It ranks e
 **Why interactive slicers and not static filters.** Static filters produce static reports, which are useful once and stale immediately. Slicers let the same dashboard answer different questions — "how did Q3 perform" and "which cities buy the most Category X" are the same layout with different filters applied. The dashboard was built once; the number of questions it can answer is much larger.`,
       charts: [
         {
-          src: '/src/assets/lab/adventureworks-bi/05-dashboard-overview.png',
+          src: '/lab/adventureworks-bi/05-dashboard-overview.png',
           caption: 'The completed Sales Overview dashboard. KPI, trend, category breakdown, top customers, top sub-categories, actual vs budget, geographic distribution, and interactive slicers across Year, Month, Category, Sub-Category, and City.',
         },
       ],
