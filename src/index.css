@@ -163,9 +163,205 @@ body {
   .cursor-ring {
     display: none !important;
   }
-  /* Restore native cursor on mobile */
   body, a, button, input, textarea, [role="button"] {
     cursor: auto !important;
   }
   body { cursor: auto; }
+}
+
+/* ─── Print styles for /resume ────────────────────── */
+@media print {
+  /* Hide everything chrome-like */
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force light theme */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Kill ALL padding and margins around the body */
+  .rs-hero,
+  .rs-body-section {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .rs-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Global font compression — 10pt is the resume standard */
+  body,
+  .rs-body,
+  .rs-body * {
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    color: #000000 !important;
+  }
+
+  /* Section spacing — biggest vertical saving */
+  .rs-section {
+    margin-bottom: 10pt !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .rs-section-last {
+    margin-bottom: 0 !important;
+  }
+
+  /* Contact grid tighter */
+  .rs-section-contact {
+    margin-bottom: 8pt !important;
+  }
+
+  .rs-contact-grid {
+    gap: 3pt 14pt !important;
+  }
+
+  .rs-contact-label {
+    font-size: 8pt !important;
+    margin-bottom: 1pt !important;
+  }
+
+  .rs-contact-value {
+    font-size: 9pt !important;
+  }
+
+  /* Paragraphs */
+  .rs-paragraph {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+
+  /* Entry lists tighter */
+  .rs-list {
+    gap: 6pt !important;
+  }
+
+  .rs-entry {
+    gap: 2pt !important;
+  }
+
+  .rs-entry-head {
+    gap: 1pt !important;
+  }
+
+  .rs-entry-title {
+    font-size: 11pt !important;
+  }
+
+  .rs-entry-meta {
+    font-size: 8pt !important;
+  }
+
+  .rs-entry-subhead {
+    font-size: 9pt !important;
+    gap: 8pt !important;
+  }
+
+  .rs-entry-desc {
+    font-size: 9.5pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+
+  /* Bullets tighter */
+  .rs-bullets {
+    gap: 1pt !important;
+    margin-top: 2pt !important;
+  }
+
+  .rs-bullet {
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
+    padding-left: 12pt !important;
+  }
+
+  /* Tech pills — inline compressed */
+  .rs-tech-row {
+    gap: 3pt !important;
+  }
+
+  .rs-tech-pill {
+    font-size: 8pt !important;
+    padding: 0 4pt !important;
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+  }
+
+  /* Skills grid tighter */
+  .rs-skills-grid {
+    gap: 3pt 14pt !important;
+  }
+
+  .rs-skill-group {
+    gap: 0pt !important;
+  }
+
+  .rs-skill-cat {
+    font-size: 8pt !important;
+    margin-bottom: 0 !important;
+  }
+
+  .rs-skill-list {
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Certs tighter */
+  .rs-cert-row {
+    padding-bottom: 2pt !important;
+    gap: 2pt 8pt !important;
+    border-bottom-color: #ddd !important;
+  }
+
+  .rs-cert-name {
+    font-size: 9.5pt !important;
+  }
+
+  .rs-cert-issuer,
+  .rs-cert-year {
+    font-size: 8.5pt !important;
+  }
+
+  /* Accents become plain black */
+  .rs-contact-label,
+  .rs-skill-cat,
+  .rs-entry-company,
+  .rs-entry-status,
+  .rs-cert-year {
+    color: #000000 !important;
+  }
+
+  /* Page margins — explicit A4 with thin margins */
+  @page {
+    margin: 0.5in 0.6in;
+    size: A4;
+  }
+
+  /* Font fallbacks */
+  body {
+    font-family: 'Inter', Arial, sans-serif !important;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Outfit', Arial, sans-serif !important;
+  }
+
+  code, pre, .rs-tech-pill, .rs-cert-year, .rs-cert-issuer,
+  .rs-entry-meta, .rs-entry-subhead, .rs-contact-value,
+  .rs-skill-list, .rs-skill-cat, .rs-contact-label {
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+  }
 }

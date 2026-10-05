@@ -57,7 +57,7 @@ export function Home() {
           </div>
 
           <p className="reveal delay-2" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)', lineHeight: 1.8, color: 'var(--secondary-foreground)', maxWidth: '560px', marginBottom: '3rem' }}>
-            Building end-to-end systems at the intersection of backend engineering, data science, and applied AI. Based in Bhilai, India.
+            I build backend services and the data layers behind them. FastAPI, Postgres, RAG pipelines — and a running lab of data work I keep public.
           </p>
 
           <div className="reveal delay-3" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>

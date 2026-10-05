@@ -4,6 +4,7 @@ import { useReveal } from './hooks/useReveal'
 import { Home } from './pages/Home'
 import { Lab } from './pages/Lab'
 import { CaseStudy } from './pages/CaseStudy'
+import { Resume } from './pages/Resume'
 
 export default function App() {
   useReveal()
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/lab" element={<Lab />} />
         <Route path="/lab/:slug" element={<CaseStudy />} />
+        <Route path="/resume" element={<Resume />} />
       </Routes>
     </>
   )

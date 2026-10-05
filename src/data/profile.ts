@@ -13,7 +13,7 @@ export const profile = {
 I care about depth over breadth: clean APIs, well-structured data, models that actually work in the wild.`,
 
   education: [
-    { degree: 'MCA', institution: 'Swami Vivekanand Technical University', duration: '2025 – 2027', status: 'Pursuing' },
+    { degree: 'MCA', institution: 'Chhattisgarh Swami Vivekanand Technical University (CSVTU)', duration: '2025 – 2027', status: 'Pursuing' },
     { degree: 'BCA', institution: 'Hemchand Yadav Vishwavidyalaya, Durg', duration: '2021 – 2025', status: 'Completed' },
   ],
 
