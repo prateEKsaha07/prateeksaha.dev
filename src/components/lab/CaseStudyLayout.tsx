@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { SectionLabel } from '../ui/SectionLabel'
+import { Markdown } from '../work/Markdown'
 import type { CaseStudy } from '../../data/caseStudies'
 
 export function CaseStudyLayout({ c }: { c: CaseStudy }) {
@@ -110,11 +111,7 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
                       {s.title}
                     </h2>
 
-                    {s.content.split('\n\n').map((p, j) => (
-                      <p key={j} className="cs-paragraph">
-                        {p}
-                      </p>
-                    ))}
+                    <Markdown content={s.content} />
 
                     {s.table && (
                       <div className="cs-table-wrap">
@@ -264,7 +261,6 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           max-width: 100%;
         }
 
-        /* Mobile: sidebar below sections, static */
         @media (max-width: 899px) {
           .cs-sidebar {
             order: 2;
@@ -275,7 +271,6 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           }
         }
 
-        /* Desktop: sticky sidebar, capped height so sticky has room to work */
         @media (min-width: 900px) {
           .cs-sidebar {
             position: sticky;
@@ -413,15 +408,6 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           letter-spacing: -0.02em;
           line-height: 1.15;
           margin: 0 0 1.25rem;
-          overflow-wrap: break-word;
-          word-wrap: break-word;
-        }
-
-        .cs-paragraph {
-          font-size: 0.9rem;
-          line-height: 1.85;
-          color: var(--secondary-foreground);
-          margin: 0 0 1rem;
           overflow-wrap: break-word;
           word-wrap: break-word;
         }

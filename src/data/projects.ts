@@ -12,6 +12,7 @@ export const projects = [
   },
   {
     title: 'AI Study Companion',
+    slug: 'rag-v2',
     tag: 'RAG · AI · Full Stack',
     desc: 'Full-stack AI study assistant using RAG over uploaded materials. Per-user FAISS vector indexes, Cohere embeddings, quiz generation, weak-topic detection, adaptive roadmaps, and learning analytics dashboard.',
     tech: ['React', 'FastAPI', 'FAISS', 'Cohere', 'Supabase', 'Recharts'],

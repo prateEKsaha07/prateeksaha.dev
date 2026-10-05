@@ -30,6 +30,8 @@ export const work: Work[] = []
 
 import { marketflip } from './marketflip'
 import { geargrid } from './geargrid'
+import { ragV2 } from './rag-v2'
 
 work.push(marketflip)
 work.push(geargrid)
+work.push(ragV2)

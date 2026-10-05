@@ -34,11 +34,6 @@ export type CaseStudy = {
 }
 
 import { loanApproval } from './loan-approval'
+import { sentinelV8 } from './sentinel-v8'
 
-console.log('[caseStudies/index] loanApproval imported:', loanApproval)
-
-export const caseStudies: CaseStudy[] = [loanApproval]
-
-console.log('[caseStudies/index] array:', caseStudies)
-console.log('[caseStudies/index] length:', caseStudies.length)
-console.log('[caseStudies/index] first item:', caseStudies[0])
+export const caseStudies: CaseStudy[] = [loanApproval, sentinelV8]
