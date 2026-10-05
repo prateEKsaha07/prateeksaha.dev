@@ -1,6 +1,3 @@
-Here is the updated `README.md` file reflecting your portfolio architecture, current route structures, feature sets, project directory map, and project roadmap.
-
-```markdown
 # Portfolio — Prateek Saha
 
 Software development and data engineering personal portfolio. Built with a brutalist-minimal dark aesthetic, high-contrast chromatic accenting, and a strict separation of content data and rendering logic.
@@ -49,6 +46,7 @@ Software development and data engineering personal portfolio. Built with a bruta
 - **Styling:** Tailwind CSS v4
 - **Diagramming:** Mermaid (dynamic text-rendered architecture diagrams)
 - **Form Backend:** Web3Forms (contact delivery)
+- **Package Manager:** npm
 
 ## Site Architecture & Routes
 
@@ -61,6 +59,24 @@ Software development and data engineering personal portfolio. Built with a bruta
 | `/work/:slug` | Detailed engineering write-up (System architecture, data model, APIs, retrospective) | `src/data/work/{slug}.ts` |
 | `/resume` | Dedicated resume page with interactive view and PDF preview/download controls | `src/data/resume.ts` |
 
+## Content Inventory
+
+### Case Studies (`/lab`)
+
+| Slug | Project | Domain |
+| :--- | :--- | :--- |
+| `loan-approval` | Loan Approval Prediction | Tabular classification |
+| `sentinel-v8` | SENTINEL.v8 — Vehicle Detection | Computer vision / object detection |
+| `adventureworks-bi` | AdventureWorks — Sales Analysis | SQL + Power BI analytics |
+
+### Engineering Write-Ups (`/work`)
+
+| Slug | Project | Domain |
+| :--- | :--- | :--- |
+| `marketflip` | MarketFlip | Full-stack marketplace |
+| `geargrid` | GearGrid | Peer-to-peer farm equipment rental |
+| `rag-v2` | AI Study Companion | Retrieval-augmented generation |
+
 ## Feature Set
 
 ### Home
@@ -70,23 +86,23 @@ Software development and data engineering personal portfolio. Built with a bruta
 - Fully functional contact form integrated with Web3Forms API.
 
 ### Lab (Data Science & ML)
-- Searchable/indexed case studies with individual accent colors.
-- Deep-dive analysis pages with sticky metadata sidebars.
-- Custom dark-themed visualization charts with structured captions.
-- Model metric comparison tables and evaluation summaries.
-- Standardized six-section analytical structure.
+- Index of case studies with per-study accent colors.
+- Deep-dive pages with sticky metadata sidebar (position-holds on desktop, flows below on mobile).
+- Dark-themed charts rendered full-width with captions.
+- Comparison tables, evaluation metrics, and six-section analytical structure.
+- Markdown rendering with bold, inline code, bullet lists, tables, and code blocks.
 
 ### Work (Software Engineering)
-- Architectural breakdown index.
-- Deep-dive technical write-ups with horizontal key facts summary strips.
-- Inline-rendered Mermaid diagrams for system architecture, data models, and ETL pipelines.
+- Index of architectural write-ups.
+- Deep-dive pages with horizontal facts strip (distinct layout from case studies).
+- Inline-rendered Mermaid diagrams for architecture, data models, and pipelines.
 - Interactive API tables with method filter chips and click-to-copy endpoint behavior.
-- Embedded markdown table, code block, and prose rendering.
+- Markdown rendering for prose, code, and tables.
 
 ### Resume
 - Native dark-themed on-page resume view.
-- Tabbed PDF preview engine and force-download utility.
-- Quick-copy email action button.
+- PDF preview (opens in new tab) and force-download controls.
+- Copy-to-clipboard email action.
 
 ### Global Capabilities
 - Custom hardware cursor with touch-device auto-detection and `prefers-reduced-motion` support.
@@ -115,10 +131,14 @@ Software development and data engineering personal portfolio. Built with a bruta
 │   │   ├── resume.ts               # Structured resume data definition
 │   │   ├── caseStudies/            # Lab case study content modules
 │   │   │   ├── index.ts            # Type exports and case study registry
-│   │   │   └── loan-approval.ts
+│   │   │   ├── loan-approval.ts
+│   │   │   ├── sentinel-v8.ts
+│   │   │   └── adventureworks-bi.ts
 │   │   └── work/                   # Engineering write-up content modules
 │   │       ├── index.ts            # Type exports and work registry
-│   │       └── marketflip.ts
+│   │       ├── marketflip.ts
+│   │       ├── geargrid.ts
+│   │       └── rag-v2.ts
 │   ├── hooks/
 │   │   ├── useCursor.ts
 │   │   ├── useReveal.ts
@@ -140,93 +160,3 @@ Software development and data engineering personal portfolio. Built with a bruta
 ├── vite.config.ts
 ├── tsconfig.json
 └── package.json
-
-```
-
-## Content Management
-
-Refer to [`CONTENT_GUIDE.md`](https://www.google.com/search?q=./CONTENT_GUIDE.md) for full documentation on content updates and data contracts.
-
-* **Adding a Case Study:** Create `src/data/caseStudies/{slug}.ts`, register in `src/data/caseStudies/index.ts`, and place PNG charts in `src/assets/lab/{slug}/`.
-* **Adding an Engineering Write-Up:** Create `src/data/work/{slug}.ts` and register in `src/data/work/index.ts`.
-* **Adding a Project:** Append an object entry to `src/data/projects.ts`.
-* **Adding Skills:** Update the categorical skills object within `src/data/profile.ts`.
-
-## Local Development
-
-Ensure **Node.js (v18+)** and **pnpm** are installed.
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start local development server (http://localhost:5173)
-pnpm dev
-
-# Build production bundle (outputs to dist/)
-pnpm build
-
-# Locally preview production build
-pnpm preview
-
-```
-
-## Deployment
-
-Automated CI/CD deployments are hosted on **Vercel** via GitHub integration. Pushes to the `main` branch trigger production builds.
-
-The included `vercel.json` file configures SPA rewrite rules to ensure client-side routes (`/lab/:slug`, `/work/:slug`, `/resume`) resolve correctly on direct hard reloads.
-
----
-
-## Technical Roadmap
-
-### Completed Features
-
-* [x] Homepage layout — hero, bio, skills matrix, projects showcase, contact section.
-* [x] Lab section — initial tabular classification case study (Loan Approval).
-* [x] Work section — initial full-stack architecture write-up (MarketFlip).
-* [x] Resume view — on-page layout, native PDF preview tab, direct download link, copy-to-clipboard email trigger.
-* [x] Routing navbar — active route detection, route changes, mobile drawer menu.
-* [x] Mermaid diagram integration for technical architecture rendering.
-* [x] Interactive API tables with method filtering and copy-on-click endpoints.
-* [x] Markdown table rendering support.
-* [x] Dedicated print styles for the resume page layout.
-* [x] Viewport responsiveness validation across mobile and desktop breakpoints.
-* [x] Project maintenance guide (`CONTENT_GUIDE.md`).
-
-### In Progress
-
-* [ ] Second engineering write-up — AI Study Companion (RAG architecture & pipeline details).
-* [ ] Second ML case study — SENTINEL.v8 (Computer Vision target evaluation).
-* [ ] Technical notes route (`/notes`) for short analytical articles (400–800 words).
-* [ ] `/now` page tracking current project focus, reading lists, and tech stack explorations.
-
-### Planned
-
-* [ ] Filterable tags for the `/work` index route.
-* [ ] Third engineering write-up — AdventureWorks BI (SQL data modeling & analytics).
-* [ ] Finished project postmortem reports.
-* [ ] Custom dark-themed 404 route.
-* [ ] Curated developer reading list.
-* [ ] Development environment summary page (`/stack`).
-
-### Out of Scope (Explicit Non-Goals)
-
-* Light theme mode — design system is dark-only by specification.
-* Embedded AI chat widgets — avoided to maintain minimal bundle overhead and performance.
-* Unverified testimonial blocks.
-* 3D hero graphics (e.g., Three.js) — omitted to prioritize page load speeds and accessibility.
-* Live GitHub statistics widgets.
-
----
-
-## Contact & Links
-
-* **Email:** prateeksaha963@gmail.com
-* **GitHub:** [@prateEKsaha07](https://github.com/prateEKsaha07)
-* **LinkedIn:** [prateeksaha](https://www.linkedin.com/in/prateeksaha)
-
-```
-
-```
