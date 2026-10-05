@@ -29,4 +29,7 @@ export type Work = {
 export const work: Work[] = []
 
 import { marketflip } from './marketflip'
+import { geargrid } from './geargrid'
+
 work.push(marketflip)
+work.push(geargrid)

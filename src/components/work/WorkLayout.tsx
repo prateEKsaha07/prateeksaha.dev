@@ -73,6 +73,73 @@ const marketflipApiGroups: ApiGroup[] = [
   },
 ]
 
+const geargridApiGroups: ApiGroup[] = [
+  {
+    title: 'Auth',
+    endpoints: [
+      { method: 'POST', path: '/auth/signup',        description: 'Create a Supabase Auth account and unified profile row.' },
+      { method: 'POST', path: '/auth/login',         description: 'Return the Supabase access token. Role is not fixed.' },
+      { method: 'GET',  path: '/auth/profiles/{id}', description: 'Fetch a user profile.' },
+      { method: 'PATCH', path: '/auth/profiles/{id}', description: 'Update a profile — pincode, language preference, verification status.' },
+    ],
+  },
+  {
+    title: 'Equipment listings',
+    note: 'Owner-side',
+    endpoints: [
+      { method: 'POST', path: '/listings',              description: 'Create an equipment listing. Fields vary by category group (handheld / vehicle / stationary).' },
+      { method: 'GET',  path: '/listings',              description: 'Browse listings by category and pincode.' },
+      { method: 'GET',  path: '/listings/{id}',         description: 'View a listing and its active bids.' },
+      { method: 'PATCH', path: '/listings/{id}',        description: 'Update a listing — price, photos, availability.' },
+      { method: 'POST', path: '/listings/{id}/bids',    description: 'Renter places a bid on a listing with proposed dates.' },
+    ],
+  },
+  {
+    title: 'Rental requests',
+    note: 'Renter-side — reverse flow',
+    endpoints: [
+      { method: 'POST', path: '/requests',              description: 'Post a rental request. Optionally voice-captured via Web Speech API.' },
+      { method: 'GET',  path: '/requests',              description: 'Browse open requests by category and pincode.' },
+      { method: 'POST', path: '/requests/{id}/bids',    description: 'Owner places a bid against a request.' },
+    ],
+  },
+  {
+    title: 'Bids',
+    endpoints: [
+      { method: 'GET',   path: '/bids',                 description: 'List bids placed by the current user.' },
+      { method: 'PATCH', path: '/bids/{id}/accept',     description: 'Accept a bid. Rejects overlapping bids with status auto_rejected_overlap.' },
+      { method: 'PATCH', path: '/bids/{id}/reject',     description: 'Reject a bid without accepting another.' },
+    ],
+  },
+  {
+    title: 'Bookings',
+    endpoints: [
+      { method: 'GET',   path: '/bookings',             description: 'List active and past bookings for the current user.' },
+      { method: 'GET',   path: '/bookings/{id}',        description: 'View a booking in detail — status, dates, agreement state.' },
+      { method: 'POST',  path: '/bookings/{id}/agreements', description: 'Create a pickup or return agreement with condition photo and notes.' },
+      { method: 'POST',  path: '/bookings/{id}/verify-otp', description: 'Verify the OTP exchanged at handover.' },
+      { method: 'PATCH', path: '/bookings/{id}/relist', description: 'Owner decides whether to relist the equipment after return.' },
+    ],
+  },
+  {
+    title: 'Extensions & ratings',
+    endpoints: [
+      { method: 'POST', path: '/bookings/{id}/extensions',    description: 'Request additional days on an active booking.' },
+      { method: 'PATCH', path: '/extensions/{id}/approve',    description: 'Owner approves an extension after a conflict check.' },
+      { method: 'POST', path: '/bookings/{id}/ratings',       description: 'Submit a pickup or return rating.' },
+    ],
+  },
+  {
+    title: 'Payments',
+    note: 'Recorded, not processed',
+    endpoints: [
+      { method: 'POST',  path: '/bookings/{id}/payment-confirmations', description: 'Record a payment event — deposit, rental, extension, or deposit return.' },
+      { method: 'PATCH', path: '/payment-confirmations/{id}/confirm',  description: 'Payer or receiver confirms the payment happened.' },
+      { method: 'GET',   path: '/bookings/{id}/invoice',               description: 'Fetch the itemised invoice for a completed booking.' },
+    ],
+  },
+]
+
 export function WorkLayout({ w }: { w: Work }) {
   return (
     <>
@@ -137,9 +204,9 @@ export function WorkLayout({ w }: { w: Work }) {
 
                 <div className="wk-section-body">
                   {s.id === 'api'
-                    ? <ApiList groups={marketflipApiGroups} />
-                    : <Markdown content={s.content} />
-                  }
+  ? <ApiList groups={w.slug === 'geargrid' ? geargridApiGroups : marketflipApiGroups} />
+  : <Markdown content={s.content} />
+}
                 </div>
               </article>
             ))}
