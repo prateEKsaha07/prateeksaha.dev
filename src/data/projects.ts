@@ -1,6 +1,7 @@
 export const projects = [
   {
     title: 'MarketFlip',
+    slug: 'marketflip',
     tag: 'Full Stack · Marketplace',
     desc: 'Reverse marketplace where buyers post requests and sellers compete through live bids. Built REST APIs, role-based auth, OTP verification, real-time chat, and ML features: price suggestion, bid ranking, demand forecasting, fraud detection.',
     tech: ['React 19', 'FastAPI', 'Supabase', 'PostgreSQL', 'Tailwind', 'ML'],

@@ -5,6 +5,8 @@ import { Home } from './pages/Home'
 import { Lab } from './pages/Lab'
 import { CaseStudy } from './pages/CaseStudy'
 import { Resume } from './pages/Resume'
+import { Work } from './pages/Work'
+import { WorkDetail } from './pages/WorkDetail'
 
 export default function App() {
   useReveal()
@@ -44,6 +46,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/lab" element={<Lab />} />
         <Route path="/lab/:slug" element={<CaseStudy />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/work/:slug" element={<WorkDetail />} />
         <Route path="/resume" element={<Resume />} />
       </Routes>
     </>

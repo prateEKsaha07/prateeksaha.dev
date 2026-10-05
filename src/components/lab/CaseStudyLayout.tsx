@@ -233,7 +233,6 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
         /* ── Body section ── */
         .cs-body-section {
           padding: 0 clamp(1.25rem, 5vw, 6rem) clamp(4rem, 10vw, 8rem);
-          overflow: hidden;
         }
 
         .cs-grid {
@@ -244,13 +243,11 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           min-width: 0;
         }
 
-        /* Grid children must be able to shrink */
         .cs-grid > * {
           min-width: 0;
           max-width: 100%;
         }
 
-        /* Desktop: sidebar + main side by side */
         @media (min-width: 900px) {
           .cs-grid {
             grid-template-columns: 280px minmax(0, 1fr);
@@ -267,7 +264,7 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           max-width: 100%;
         }
 
-        /* Mobile: sidebar below sections */
+        /* Mobile: sidebar below sections, static */
         @media (max-width: 899px) {
           .cs-sidebar {
             order: 2;
@@ -278,11 +275,13 @@ export function CaseStudyLayout({ c }: { c: CaseStudy }) {
           }
         }
 
-        /* Desktop: sticky sidebar */
+        /* Desktop: sticky sidebar, capped height so sticky has room to work */
         @media (min-width: 900px) {
           .cs-sidebar {
             position: sticky;
             top: 88px;
+            max-height: calc(100vh - 104px);
+            overflow-y: auto;
           }
         }
 

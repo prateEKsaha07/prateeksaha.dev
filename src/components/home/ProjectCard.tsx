@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
 
 export function ProjectCard({ p, idx }: { p: typeof projects[0]; idx: number }) {
@@ -61,6 +62,26 @@ export function ProjectCard({ p, idx }: { p: typeof projects[0]; idx: number }) 
           <span key={t} style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.6rem', padding: '2px 8px', background: 'var(--secondary)', color: 'var(--muted-foreground)', letterSpacing: '0.05em' }}>{t}</span>
         ))}
       </div>
+
+      {'slug' in p && p.slug && (
+        <Link
+          to={`/work/${p.slug}`}
+          style={{
+            display: 'inline-block',
+            marginTop: '1rem',
+            fontFamily: 'JetBrains Mono,monospace',
+            fontSize: '0.65rem',
+            color: hov ? p.accent : 'var(--muted-foreground)',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            transition: 'color 0.2s',
+            cursor: 'none',
+          }}
+        >
+          Deep dive →
+        </Link>
+      )}
     </div>
   )
 }

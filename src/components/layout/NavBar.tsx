@@ -92,6 +92,24 @@ export function NavBar({ active }: { active: string }) {
           lab
         </Link>
         <Link
+          to="/work"
+          style={{
+            fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: location.pathname.startsWith('/work') ? 'var(--accent)' : 'var(--muted-foreground)',
+            textDecoration: 'none', cursor: 'none',
+            transition: 'color 0.2s', padding: '4px 0',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+          onMouseLeave={e => {
+            if (!location.pathname.startsWith('/work')) {
+              e.currentTarget.style.color = 'var(--muted-foreground)'
+            }
+          }}
+        >
+          work
+        </Link>
+        <Link
           to="/resume"
           style={{
             fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
@@ -159,6 +177,19 @@ export function NavBar({ active }: { active: string }) {
             }}
           >
             lab
+          </Link>
+
+          <Link
+            to="/work"
+            onClick={() => setOpen(false)}
+            style={{
+              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: location.pathname.startsWith('/work') ? 'var(--accent)' : 'var(--foreground)',
+              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+            }}
+          >
+            work
           </Link>
 
           <Link
