@@ -17,6 +17,11 @@ export function NavBar({ active }: { active: string }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close the mobile drawer whenever the route changes
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
+
   const goToSection = (id: string) => {
     setOpen(false)
     if (isHome) {
@@ -54,7 +59,7 @@ export function NavBar({ active }: { active: string }) {
       <button
         onClick={goHome}
         aria-label="Back to top"
-        style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em', color: 'var(--foreground)', background: 'none', border: 'none', cursor: 'none' }}
+        style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em', color: 'var(--foreground)', background: 'none', border: 'none', cursor: 'none', position: 'relative', zIndex: 2 }}
       >
         PS<span style={{ color: 'var(--accent)' }}>.</span>
       </button>
@@ -178,7 +183,7 @@ export function NavBar({ active }: { active: string }) {
       {/* Mobile hamburger */}
       <button
         onClick={() => setOpen(o => !o)}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--foreground)', display: 'none' }}
+        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--foreground)', display: 'none', position: 'relative', zIndex: 2 }}
         className="show-mobile"
         aria-label="Menu"
         aria-expanded={open}
@@ -188,103 +193,170 @@ export function NavBar({ active }: { active: string }) {
         </svg>
       </button>
 
-      {/* Mobile menu */}
-      {open && (
-        <div style={{
-          position: 'absolute', top: '64px', left: 0, right: 0,
-          background: 'rgba(9,9,9,0.98)', backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid var(--border)', padding: '1.5rem',
-          display: 'flex', flexDirection: 'column', gap: '1.5rem',
-        }}>
-          {links.map(l => (
-            <button key={l} onClick={() => goToSection(l)}
-              style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--foreground)', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
-            >{l}</button>
-          ))}
+      {/* Mobile menu — animated open/close */}
+      <div className={`mobile-drawer ${open ? 'mobile-drawer-open' : ''}`} aria-hidden={!open}>
+        <div className="mobile-drawer-inner">
+          <div className="mobile-drawer-content">
+            {links.map(l => (
+              <button key={l} onClick={() => goToSection(l)}
+                style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--foreground)', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0 }}
+              >{l}</button>
+            ))}
 
-          <Link
-            to="/lab"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: location.pathname.startsWith('/lab') ? 'var(--accent)' : 'var(--foreground)',
-              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
-          >
-            lab
-          </Link>
+            <Link
+              to="/lab"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: location.pathname.startsWith('/lab') ? 'var(--accent)' : 'var(--foreground)',
+                textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+              }}
+            >
+              lab
+            </Link>
 
-          <Link
-            to="/work"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: location.pathname.startsWith('/work') ? 'var(--accent)' : 'var(--foreground)',
-              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
-          >
-            work
-          </Link>
+            <Link
+              to="/work"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: location.pathname.startsWith('/work') ? 'var(--accent)' : 'var(--foreground)',
+                textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+              }}
+            >
+              work
+            </Link>
 
-          <Link
-            to="/now"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: location.pathname === '/now' ? 'var(--accent)' : 'var(--foreground)',
-              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
-          >
-            now
-          </Link>
+            <Link
+              to="/now"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: location.pathname === '/now' ? 'var(--accent)' : 'var(--foreground)',
+                textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+              }}
+            >
+              now
+            </Link>
 
-          <Link
-            to="/stack"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: location.pathname === '/stack' ? 'var(--accent)' : 'var(--foreground)',
-              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
-          >
-            stack
-          </Link>
+            <Link
+              to="/stack"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: location.pathname === '/stack' ? 'var(--accent)' : 'var(--foreground)',
+                textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+              }}
+            >
+              stack
+            </Link>
 
-          <Link
-            to="/resume"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: location.pathname === '/resume' ? 'var(--accent)' : 'var(--foreground)',
-              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
-            }}
-          >
-            resume
-          </Link>
+            <Link
+              to="/resume"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: location.pathname === '/resume' ? 'var(--accent)' : 'var(--foreground)',
+                textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+              }}
+            >
+              resume
+            </Link>
 
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: 'var(--foreground)',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              textAlign: 'left',
-            }}
-          >
-            GitHub ↗
-          </a>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: 'var(--foreground)',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                textAlign: 'left',
+              }}
+            >
+              GitHub ↗
+            </a>
+          </div>
         </div>
-      )}
+      </div>
+
+      {/* Scoped styles for the mobile drawer */}
+      <style>{`
+        .mobile-drawer {
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          display: grid;
+          grid-template-rows: 0fr;
+          transition:
+            grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.3s ease;
+          opacity: 0;
+          background: rgba(9,9,9,0.98);
+          backdrop-filter: blur(16px);
+          border-bottom: 1px solid transparent;
+          z-index: 1;
+        }
+
+        .mobile-drawer-open {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          border-bottom-color: var(--border);
+        }
+
+        .mobile-drawer-inner {
+          overflow: hidden;
+          min-height: 0;
+        }
+
+        .mobile-drawer-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          padding: 1.5rem;
+        }
+
+        /* Stagger the links in when opening */
+        .mobile-drawer-content > * {
+          opacity: 0;
+          transform: translateY(-8px);
+          transition:
+            opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-drawer-open .mobile-drawer-content > * {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(1) { transition-delay: 0.08s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(2) { transition-delay: 0.11s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(3) { transition-delay: 0.14s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(4) { transition-delay: 0.17s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(5) { transition-delay: 0.20s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(6) { transition-delay: 0.23s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(7) { transition-delay: 0.26s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(8) { transition-delay: 0.29s; }
+        .mobile-drawer-open .mobile-drawer-content > *:nth-child(9) { transition-delay: 0.32s; }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .mobile-drawer,
+          .mobile-drawer-content > * {
+            transition: none !important;
+          }
+        }
+      `}</style>
     </nav>
   )
 }

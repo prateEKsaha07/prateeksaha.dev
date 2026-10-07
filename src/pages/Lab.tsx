@@ -74,7 +74,7 @@ export function Lab() {
       </section>
 
       {/* ═══ FULLSTACK BRANCH ═══════════════════════════════════════════ */}
-      <section style={{ padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 7vw, 6rem)' }}>
+      {/* <section style={{ padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 7vw, 6rem)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <SectionLabel>Supporting Work</SectionLabel>
 
@@ -90,7 +90,7 @@ export function Lab() {
             {projects.map((p, i) => <ProjectCard key={p.title} p={p} idx={i} />)}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <footer style={{ padding: '2rem clamp(1.5rem, 7vw, 6rem)', borderTop: '1px solid var(--border)', display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.6rem', letterSpacing: '0.1em', color: 'var(--muted-foreground)' }}>
