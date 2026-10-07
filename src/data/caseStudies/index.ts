@@ -36,5 +36,9 @@ export type CaseStudy = {
 import { loanApproval } from './loan-approval'
 import { sentinelV8 } from './sentinel-v8'
 import { adventureworksBi } from './adventureworks-bi'
+import { diseaseSymptomClassifier } from './disease-symptom-classifier'
+import { goldPriceRegression } from './gold-price-regression'
+import { customerSegmentation } from './customer-segmentation'
 
-export const caseStudies: CaseStudy[] = [loanApproval, sentinelV8, adventureworksBi]
+
+export const caseStudies: CaseStudy[] = [loanApproval, sentinelV8, adventureworksBi, diseaseSymptomClassifier, goldPriceRegression, customerSegmentation]
