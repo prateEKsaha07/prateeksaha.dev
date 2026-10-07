@@ -65,19 +65,50 @@ export function NavBar({ active }: { active: string }) {
       </button>
 
       {/* Desktop nav */}
-      <div style={{ display: 'flex', gap: 'clamp(1.25rem, 1.6vw, 2rem)', alignItems: 'center' }} className="hidden-mobile">
-        {links.map(l => (
-          <button
-            key={l}
-            onClick={() => goToSection(l)}
-            style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
-              textTransform: 'uppercase', color: active === l ? 'var(--accent)' : 'var(--muted-foreground)',
-              background: 'none', border: 'none', cursor: 'none',
-              transition: 'color 0.2s', padding: '4px 0',
-            }}
-          >{l}</button>
-        ))}
+      <div style={{ display: 'flex', gap: 'clamp(1rem, 1.4vw, 1.5rem)', alignItems: 'center' }} className="hidden-mobile">
+
+        {/* ── GROUPED: about · skills · projects · contact ── */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1.25rem',
+            padding: '6px 14px',
+            border: '1px solid var(--border)',
+            background: 'rgba(255,255,255,0.015)',
+          }}
+        >
+          {links.map(l => (
+            <button
+              key={l}
+              onClick={() => goToSection(l)}
+              style={{
+                fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: active === l ? 'var(--accent)' : 'var(--muted-foreground)',
+                background: 'none', border: 'none', cursor: 'none',
+                transition: 'color 0.2s', padding: '4px 0',
+              }}
+              onMouseEnter={e => { if (active !== l) e.currentTarget.style.color = 'var(--accent)' }}
+              onMouseLeave={e => { if (active !== l) e.currentTarget.style.color = 'var(--muted-foreground)' }}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Divider ── */}
+        <div
+          aria-hidden="true"
+          style={{
+            width: '1px',
+            height: '16px',
+            background: 'var(--border)',
+            opacity: 0.7,
+          }}
+        />
+
+        {/* ── Standalone routes ── */}
         <Link
           to="/lab"
           style={{
@@ -197,11 +228,30 @@ export function NavBar({ active }: { active: string }) {
       <div className={`mobile-drawer ${open ? 'mobile-drawer-open' : ''}`} aria-hidden={!open}>
         <div className="mobile-drawer-inner">
           <div className="mobile-drawer-content">
-            {links.map(l => (
-              <button key={l} onClick={() => goToSection(l)}
-                style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--foreground)', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0 }}
-              >{l}</button>
-            ))}
+
+            {/* ── GROUPED section links ── */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.25rem',
+                padding: '1rem',
+                border: '1px solid var(--border)',
+                background: 'rgba(255,255,255,0.015)',
+              }}
+            >
+              {links.map(l => (
+                <button key={l} onClick={() => goToSection(l)}
+                  style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: active === l ? 'var(--accent)' : 'var(--foreground)', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0 }}
+                >{l}</button>
+              ))}
+            </div>
+
+            {/* ── Divider ── */}
+            <div
+              aria-hidden="true"
+              style={{ height: '1px', width: '100%', background: 'var(--border)', opacity: 0.7 }}
+            />
 
             <Link
               to="/lab"
