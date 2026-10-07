@@ -33,6 +33,17 @@ export const projects = [
     num: '03',
   },
   {
+  title: 'GearGrid',
+  slug: 'geargrid',
+  tag: 'Full Stack · Marketplace',
+  desc: 'Peer-to-peer farm equipment rental marketplace — small farmers rent tractors, tillers, and harvesters from nearby owners instead of buying them. Slot-based booking, digital handover agreements, OTP verification, and reliability scoring. Submitted for the Tata Young Social Innovators Challenge 2026.',
+  tech: ['React', 'FastAPI', 'Supabase', 'Cloudinary', 'Vite', 'Tailwind'],
+  live: null,
+  github: 'https://github.com/prateEKsaha07',
+  accent: '#00FF85',
+  num: '07',
+},
+  {
     title: 'AdventureWorks BI',
     tag: 'Data Analytics · Power BI',
     desc: 'End-to-end sales analysis: SQL extraction from AdventureWorks MySQL, star-schema data model, Power Query transformation, and a full interactive Power BI dashboard with DAX measures for margins, customer ranking, and budget variance.',
@@ -63,15 +74,4 @@ export const projects = [
     accent: '#FF4C8B',
     num: '06',
   },
-  {
-  title: 'GearGrid',
-  slug: 'geargrid',
-  tag: 'Full Stack · Marketplace',
-  desc: 'Peer-to-peer farm equipment rental marketplace — small farmers rent tractors, tillers, and harvesters from nearby owners instead of buying them. Slot-based booking, digital handover agreements, OTP verification, and reliability scoring. Submitted for the Tata Young Social Innovators Challenge 2026.',
-  tech: ['React', 'FastAPI', 'Supabase', 'Cloudinary', 'Vite', 'Tailwind'],
-  live: null,
-  github: 'https://github.com/prateEKsaha07',
-  accent: '#00FF85',
-  num: '07',
-},
 ]

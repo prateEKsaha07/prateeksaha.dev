@@ -7,6 +7,9 @@ import { CaseStudy } from './pages/CaseStudy'
 import { Resume } from './pages/Resume'
 import { Work } from './pages/Work'
 import { WorkDetail } from './pages/WorkDetail'
+import { Now } from './pages/Now'
+import { Stack } from './pages/Stack'
+import { NotFound } from './pages/NotFound'
 
 export default function App() {
   useReveal()
@@ -48,7 +51,10 @@ export default function App() {
         <Route path="/lab/:slug" element={<CaseStudy />} />
         <Route path="/work" element={<Work />} />
         <Route path="/work/:slug" element={<WorkDetail />} />
+        <Route path="/stack" element={<Stack />} />
+        <Route path="/now" element={<Now />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )

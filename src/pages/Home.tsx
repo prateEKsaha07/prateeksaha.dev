@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { useState, useEffect } from 'react'
 import { useTypewriter } from '../hooks/useTypewriter'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { profile } from '../data/profile'
@@ -15,6 +16,38 @@ export function Home() {
   const activeSection = useActiveSection(['about', 'skills', 'projects', 'contact'])
 
   const marqueeItems = Object.values(profile.skills).flat()
+
+  const [showAllProjects, setShowAllProjects] = useState(false)
+  const [showAllCerts, setShowAllCerts] = useState(false)
+
+  const INITIAL_PROJECTS = 6
+  const INITIAL_CERTS = 4
+
+  const visibleProjects = showAllProjects ? projects : projects.slice(0, INITIAL_PROJECTS)
+  const visibleCerts = showAllCerts ? profile.certs : profile.certs.slice(0, INITIAL_CERTS)
+
+  const hiddenProjectsCount = Math.max(0, projects.length - INITIAL_PROJECTS)
+  const hiddenCertsCount = Math.max(0, profile.certs.length - INITIAL_CERTS)
+
+  // Re-observe newly expanded cards so they animate in
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const els = document.querySelectorAll('.reveal:not(.visible)')
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible')
+            io.unobserve(e.target)
+          }
+        }),
+        { threshold: 0.12 }
+      )
+      els.forEach(el => io.observe(el))
+      return () => io.disconnect()
+    }, 50)
+
+    return () => clearTimeout(timeout)
+  }, [showAllProjects, showAllCerts])
 
   const gridStyle: CSSProperties = {
     position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
@@ -42,7 +75,6 @@ export function Home() {
       >
         <div style={gridStyle} />
 
-        {/* PS watermark — small, subtle, sits behind content on the right */}
         <div className="hero-watermark" aria-hidden="true">PS</div>
 
         <div className="hero-content">
@@ -196,7 +228,7 @@ export function Home() {
           <div style={{ marginTop: '4rem' }}>
             <div style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.62rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Certifications</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1rem' }}>
-              {profile.certs.map((c, i) => (
+              {visibleCerts.map((c, i) => (
                 <div key={c.name} className={`reveal delay-${Math.min(i + 1, 6)}`} style={{ padding: '1rem 1.25rem', background: 'var(--card)', borderLeft: '2px solid var(--border)' }}>
                   <div style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.25rem' }}>{c.name}</div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--muted-foreground)' }}>{c.issuer}</div>
@@ -204,6 +236,19 @@ export function Home() {
                 </div>
               ))}
             </div>
+
+            {hiddenCertsCount > 0 && (
+              <div className="reveal" style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+                <button
+                  onClick={() => setShowAllCerts(v => !v)}
+                  className="expand-toggle"
+                >
+                  {showAllCerts
+                    ? '− Show fewer ↑'
+                    : `+ ${hiddenCertsCount} more ${hiddenCertsCount === 1 ? 'certification' : 'certifications'} ↓`}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -217,10 +262,23 @@ export function Home() {
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap: '1.5rem' }}>
-            {projects.map((p, i) => <ProjectCard key={p.title} p={p} idx={i} />)}
+            {visibleProjects.map((p, i) => <ProjectCard key={p.title} p={p} idx={i} />)}
           </div>
 
-          <div className="reveal" style={{ marginTop: '3rem', textAlign: 'center' }}>
+          {hiddenProjectsCount > 0 && (
+            <div className="reveal" style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+              <button
+                onClick={() => setShowAllProjects(v => !v)}
+                className="expand-toggle"
+              >
+                {showAllProjects
+                  ? '− Show fewer ↑'
+                  : `+ ${hiddenProjectsCount} more ${hiddenProjectsCount === 1 ? 'project' : 'projects'} ↓`}
+              </button>
+            </div>
+          )}
+
+          <div className="reveal" style={{ marginTop: '1.5rem', textAlign: 'center' }}>
             <a href={profile.github} target="_blank" rel="noreferrer"
               style={{
                 fontFamily: 'JetBrains Mono,monospace', fontSize: '0.75rem', letterSpacing: '0.1em',
@@ -306,7 +364,6 @@ export function Home() {
           min-width: 0;
         }
 
-        /* ── Hero name ── */
         .hero-name {
           font-family: 'Outfit', sans-serif;
           font-weight: 900;
@@ -316,7 +373,6 @@ export function Home() {
           margin: 0 0 1.25rem;
         }
 
-        /* ── Typewriter ── */
         .hero-typed {
           font-family: 'JetBrains Mono', monospace;
           font-size: clamp(0.85rem, 1.5vw, 1rem);
@@ -328,7 +384,6 @@ export function Home() {
           gap: 2px;
         }
 
-        /* ── Paragraph ── */
         .hero-paragraph {
           font-size: clamp(0.875rem, 1.4vw, 1rem);
           line-height: 1.75;
@@ -337,7 +392,6 @@ export function Home() {
           margin: 0 0 2.5rem;
         }
 
-        /* ── CTAs ── */
         .hero-ctas {
           display: flex;
           flex-wrap: wrap;
@@ -384,7 +438,6 @@ export function Home() {
           color: var(--accent);
         }
 
-        /* ── Socials ── */
         .hero-socials {
           display: flex;
           gap: 1.5rem;
@@ -408,7 +461,6 @@ export function Home() {
           border-bottom-color: var(--accent);
         }
 
-        /* ── Scroll indicator ── */
         .hero-scroll {
           position: absolute;
           bottom: 2rem;
@@ -435,7 +487,6 @@ export function Home() {
           animation: float 2s ease-in-out infinite;
         }
 
-        /* ── PS watermark ── */
         .hero-watermark {
           position: absolute;
           right: 3rem;
@@ -466,6 +517,24 @@ export function Home() {
             right: -1.5rem;
             opacity: 0.5;
           }
+        }
+
+        /* ── Expand toggle button ── */
+        .expand-toggle {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.7rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+          background: transparent;
+          border: 1px solid var(--border);
+          padding: 0.65rem 1.5rem;
+          cursor: none;
+          transition: all 0.2s;
+        }
+        .expand-toggle:hover {
+          border-color: var(--accent);
+          color: var(--accent);
         }
       `}</style>
     </>

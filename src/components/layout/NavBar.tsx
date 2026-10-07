@@ -60,7 +60,7 @@ export function NavBar({ active }: { active: string }) {
       </button>
 
       {/* Desktop nav */}
-      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }} className="hidden-mobile">
+      <div style={{ display: 'flex', gap: 'clamp(1.25rem, 1.6vw, 2rem)', alignItems: 'center' }} className="hidden-mobile">
         {links.map(l => (
           <button
             key={l}
@@ -108,6 +108,42 @@ export function NavBar({ active }: { active: string }) {
           }}
         >
           work
+        </Link>
+        <Link
+          to="/now"
+          style={{
+            fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: location.pathname === '/now' ? 'var(--accent)' : 'var(--muted-foreground)',
+            textDecoration: 'none', cursor: 'none',
+            transition: 'color 0.2s', padding: '4px 0',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+          onMouseLeave={e => {
+            if (location.pathname !== '/now') {
+              e.currentTarget.style.color = 'var(--muted-foreground)'
+            }
+          }}
+        >
+          now
+        </Link>
+        <Link
+          to="/stack"
+          style={{
+            fontFamily: 'JetBrains Mono,monospace', fontSize: '0.7rem', letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: location.pathname === '/stack' ? 'var(--accent)' : 'var(--muted-foreground)',
+            textDecoration: 'none', cursor: 'none',
+            transition: 'color 0.2s', padding: '4px 0',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+          onMouseLeave={e => {
+            if (location.pathname !== '/stack') {
+              e.currentTarget.style.color = 'var(--muted-foreground)'
+            }
+          }}
+        >
+          stack
         </Link>
         <Link
           to="/resume"
@@ -190,6 +226,32 @@ export function NavBar({ active }: { active: string }) {
             }}
           >
             work
+          </Link>
+
+          <Link
+            to="/now"
+            onClick={() => setOpen(false)}
+            style={{
+              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: location.pathname === '/now' ? 'var(--accent)' : 'var(--foreground)',
+              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+            }}
+          >
+            now
+          </Link>
+
+          <Link
+            to="/stack"
+            onClick={() => setOpen(false)}
+            style={{
+              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.8rem', letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: location.pathname === '/stack' ? 'var(--accent)' : 'var(--foreground)',
+              textDecoration: 'none', cursor: 'pointer', textAlign: 'left',
+            }}
+          >
+            stack
           </Link>
 
           <Link
