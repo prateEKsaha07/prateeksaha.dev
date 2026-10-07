@@ -4,7 +4,7 @@ export const goldPriceRegression: CaseStudy = {
   slug: 'gold-price-regression',
   title: 'Gold Price Prediction — Feature Importance Decomposition',
   tag: 'Regression · Time Series',
-  desc: 'A Random Forest and XGBoost regressor predict daily GLD prices from four correlated market instruments and three lagged gold prices. Headline result: R² 0.915 with $1.11 MAE on a chronological 80/20 split. Decomposition tells a different story: 94% of the model\u2019s importance is a single lag feature. Remove the lags and the same model collapses to R² \u22120.371 \u2014 worse than predicting the mean.',
+  desc: 'A Random Forest and XGBoost regressor predict daily GLD prices from four correlated market instruments and three lagged gold prices. Decomposition tells a different story: 94% of the model\u2019s importance is a single lag feature. Remove the lags and the same model collapses to R² \u22120.371 \u2014 worse than predicting the mean.',
   tech: ['Python', 'scikit-learn', 'XGBoost', 'pandas', 'seaborn', 'Matplotlib'],
   accent: '#E4B363',
   num: '05',
