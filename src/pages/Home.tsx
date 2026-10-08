@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import { useState, useEffect } from 'react'
 import { useTypewriter } from '../hooks/useTypewriter'
 import { useActiveSection } from '../hooks/useActiveSection'
@@ -11,10 +10,12 @@ import { ProjectCard } from '../components/home/ProjectCard'
 import { ContactForm } from '../components/home/ContactForm'
 import { DataPipeline } from '../components/home/DataPipeline'
 import TechText from '../components/ui/TechText'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export function Home() {
   const typed = useTypewriter(profile.roles)
   const activeSection = useActiveSection(['about', 'skills', 'projects', 'contact'])
+  const isMobile = useIsMobile(700)
 
   const marqueeItems = Object.values(profile.skills).flat()
 
@@ -49,29 +50,20 @@ export function Home() {
     return () => clearTimeout(timeout)
   }, [showAllProjects, showAllCerts])
 
-  const gridStyle: CSSProperties = {
-    position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
-    backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)',
-    backgroundSize: '80px 80px',
-    opacity: 0.4,
-    maskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent)',
-  }
-
   return (
     <>
       <NavBar active={activeSection} />
 
       {/* ═══ HERO ═══════════════════════════════════════════════════════ */}
       <section id="hero" className="hero-section">
-        <div style={gridStyle} />
+        <div className="hero-grid-bg" />
 
         <div className="hero-watermark" aria-hidden="true">PS</div>
 
         <div className="hero-grid">
-          {/* Visual first in JSX → on top on mobile (CSS order handles desktop) */}
           <div className="hero-visual">
-            <DataPipeline />
-          </div>
+  <DataPipeline />
+</div>
 
           <div className="hero-content">
             <div className="reveal hero-status">
@@ -79,29 +71,28 @@ export function Home() {
               <span className="hero-status-text">Open to opportunities · Fresher</span>
             </div>
 
-            {/* ── Name with TechText effect ── */}
             <div className="reveal hero-name-wrap">
               <TechText
                 text={profile.name}
                 fontFamily="Outfit, sans-serif"
-                fontSize={260}
+                fontSize={isMobile ? 160 : 260}
                 fontWeight={900}
                 letterSpacing={-0.04}
                 color="#ffffff"
                 accentColor="#00FF41"
-                reach={220}
+                reach={isMobile ? 140 : 220}
                 softness={0.55}
                 dashLength={4}
                 dashGap={3}
                 strokeWidth={1.4}
                 lineStyle="dashed"
                 reveal="letter"
-                specks={18}
+                specks={isMobile ? 8 : 18}
                 selection
                 labels={false}
-                draggable
+                draggable={!isMobile}
                 sweep
-                speed={1.1}
+                speed={isMobile ? 0.8 : 1.1}
               />
             </div>
 
@@ -147,8 +138,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* ═══ MARQUEE ════════════════════════════════════════════════════ */}
-      <div className="marquee-wrap">
+      {/* ═══ MARQUEE — visible on all screens ══════════════════════════ */}
+      <div className="marquee-wrap hide-mobile">
         <div className="marquee-track">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="marquee-item">
@@ -172,14 +163,15 @@ export function Home() {
               {profile.about.split('\n\n').map((p, i) => (
                 <p key={i} className="reveal about-paragraph">{p}</p>
               ))}
-              <div className="reveal delay-2 about-tags">
+            </div>
+
+            <div>
+              <div className="reveal about-tags">
                 {['Open to relocate', 'Remote-friendly', 'Fresher'].map(tag => (
                   <span key={tag} className="about-tag">{tag}</span>
                 ))}
               </div>
-            </div>
 
-            <div>
               <div className="reveal about-block">
                 <div className="about-block-label">Education</div>
                 <div className="about-block-list">

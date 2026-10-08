@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'Prateek Saha',
+  name: 'PRATEEK SAHA',
   title: 'Software Developer · Data Engineer · AI Builder',
   location: 'Bhilai, Chhattisgarh, India',
   email: 'prateeksaha963@gmail.com',
@@ -48,5 +48,8 @@ I care about depth over breadth: clean APIs, well-structured data, models that a
     { name: 'Machine Learning & Data Science', issuer: 'Kirill Eremenko · Udemy', year: '2026 (Ongoing)' },
     { name: 'Learn SQL using MySQL', issuer: 'Prateek Narang · Scaler', year: '2024' },
     { name: 'Data Structures & Algorithms (C++)', issuer: 'Aditya Jain · Scaler', year: '2024' },
+    { name: 'Acquiring Data', issuer: 'Accenture · SCC Nasscom', year: '2026' },
+    { name: 'Data Processing and Visualisation', issuer: 'Accenture · SCC Nasscom', year: '2026' },
+    { name: 'Exploratory Data Analysis', issuer: 'Accenture · SCC Nasscom', year: '2026' }
   ],
 }
