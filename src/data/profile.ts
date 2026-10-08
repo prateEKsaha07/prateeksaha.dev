@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'PRATEEK SAHA',
+  name: 'Prateek Saha',
   title: 'Software Developer · Data Engineer · AI Builder',
   location: 'Bhilai, Chhattisgarh, India',
   email: 'prateeksaha963@gmail.com',
